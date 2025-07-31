@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Búsqueda Avanzada - Agencia de Viajes</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 32px;
+        }
+
+        .search-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .search-card {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            border: 2px solid #e9ecef;
+            transition: all 0.3s ease;
+        }
+
+        .search-card:hover {
+            border-color: #4facfe;
+            transform: translateY(-2px);
+        }
+
+        .search-card h3 {
+            color: #495057;
+            margin-bottom: 15px;
+        }
+
+        .btn {
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .results {
+            margin-top: 30px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            display: none;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #dee2e6;
+        }
+
+        th {
+            background-color: #4facfe;
+            color: white;
+        }
+
+        tr:hover {
+            background-color: #f1f3f4;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Búsqueda Avanzada de Servicios</h1>
+        
+        <div class="search-options">
+            <div class="search-card">
+                <h3>Hoteles Populares</h3>
+                <p>Encuentra hoteles con más de 2 reservas</p>
+                <button class="btn" onclick="buscarHotelesPopulares()">Buscar Hoteles</button>
+            </div>
+            
+            <div class="search-card">
+                <h3>Todas las Reservas</h3>
+                <p>Ver listado completo de reservas</p>
+                <button class="btn" onclick="mostrarTodasReservas()">Ver Reservas</button>
+            </div>
+            
+            <div class="search-card">
+                <h3>Estadísticas</h3>
+                <p>Resumen de reservas por hotel</p>
+                <button class="btn" onclick="mostrarEstadisticas()">Ver Estadísticas</button>
+            </div>
+        </div>
+        
+        <div id="results" class="results"></div>
+    </div>
+
+    <script>
+        function buscarHotelesPopulares() {
+            fetch('consulta_avanzada.php')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('results').innerHTML = data;
+                    document.getElementById('results').style.display = 'block';
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    document.getElementById('results').innerHTML = '<p style="color: red;">Error al cargar los datos</p>';
+                    document.getElementById('results').style.display = 'block';
+                });
+        }
+
+        function mostrarTodasReservas() {
+            fetch('mostrar_reservas.php')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('results').innerHTML = data;
+                    document.getElementById('results').style.display = 'block';
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    document.getElementById('results').innerHTML = '<p style="color: red;">Error al cargar los datos</p>';
+                    document.getElementById('results').style.display = 'block';
+                });
+        }
+
+        function mostrarEstadisticas() {
+            fetch('estadisticas.php')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('results').innerHTML = data;
+                    document.getElementById('results').style.display = 'block';
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    document.getElementById('results').innerHTML = '<p style="color: red;">Error al cargar los datos</p>';
+                    document.getElementById('results').style.display = 'block';
+                });
+        }
+    </script>
+</body>
+</html>

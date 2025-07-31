@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nuvia - Sueña Viajando</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f8f9fa;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        /* Header */
+        .header {
+            background: #ffffff;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 80px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            color: #2c3e50;
+            font-weight: 700;
+            font-size: 1.5rem;
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: #2c3e50;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-link:hover {
+            color: #3498db;
+        }
+
+        /* Hero Section */
+        .hero {
+            /* background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); */
+
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.7) 0%, rgba(118, 75, 162, 0.7) 100%), 
+            url('image_portada.png');
+            color: white;
+            padding: 80px 20px;
+            text-align: center;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 300;
+            margin-bottom: 20px;
+            letter-spacing: -1px;
+        }
+
+        .hero-subtitle {
+            font-size: 1.3rem;
+            margin-bottom: 40px;
+            opacity: 0.9;
+            font-weight: 300;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 15px 30px;
+            border: none;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: #e74c3c;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #c0392b;
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: rgba(255,255,255,0.2);
+            color: white;
+            border: 2px solid rgba(255,255,255,0.3);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255,255,255,0.3);
+            transform: translateY(-2px);
+        }
+
+        /* Search Section */
+        .search-section {
+            background: white;
+            padding: 60px 20px;
+            margin-top: -30px;
+            position: relative;
+            z-index: 10;
+        }
+
+        .search-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .search-tabs {
+            display: flex;
+            gap: 0;
+            margin-bottom: 30px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .search-tab {
+            padding: 15px 25px;
+            background: none;
+            border: none;
+            color: #666;
+            font-weight: 500;
+            cursor: pointer;
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        .search-tab.active {
+            color: #3498db;
+            border-bottom-color: #3498db;
+        }
+
+        .search-form {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            align-items: end;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group label {
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #2c3e50;
+            font-size: 0.9rem;
+        }
+
+        .form-control {
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 6px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: #3498db;
+        }
+
+        .search-btn {
+            padding: 12px 30px;
+            background: #3498db;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .search-btn:hover {
+            background: #2980b9;
+        }
+
+        /* Services Section */
+        .services {
+            padding: 80px 20px;
+            background: #f8f9fa;
+        }
+
+        .services-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .services h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: #2c3e50;
+            font-weight: 300;
+        }
+
+        .services-subtitle {
+            text-align: center;
+            font-size: 1.1rem;
+            color: #666;
+            margin-bottom: 60px;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+        }
+
+        .service-card {
+            background: white;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border-left: 4px solid #3498db;
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        }
+
+        .service-icon {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .service-card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+            color: #2c3e50;
+            font-weight: 600;
+        }
+
+        .service-card p {
+            color: #666;
+            margin-bottom: 25px;
+            line-height: 1.6;
+        }
+
+        .service-actions {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .service-link {
+            padding: 10px 20px;
+            background: #f8f9fa;
+            color: #3498db;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            border: 2px solid #e0e0e0;
+        }
+
+        .service-link:hover {
+            background: #3498db;
+            color: white;
+            border-color: #3498db;
+        }
+
+        /* Footer */
+        .footer {
+            background: #2c3e50;
+            color: white;
+            padding: 50px 20px 30px;
+            text-align: center;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-info {
+            margin-bottom: 20px;
+        }
+
+        .footer-info h3 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            font-weight: 300;
+        }
+
+        .footer-tagline {
+            opacity: 0.8;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                height: auto;
+                padding: 20px;
+            }
+
+            .nav-links {
+                margin-top: 20px;
+                gap: 20px;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .search-form {
+                grid-template-columns: 1fr;
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <div class="header">
+        <div class="header-content">
+            <a href="index.html" class="logo">
+                <div class="logo-icon">✈️</div>
+                <span>Nuvia</span>
+            </a>
+            <nav class="nav-links">
+                <a href="mostrar_vuelos.php" class="nav-link">Vuelos</a>
+                <a href="mostrar_hoteles.php" class="nav-link">Hoteles</a>
+                <a href="mostrar_reservas.php" class="nav-link">Mis Reservas</a>
+                <a href="estadisticas.php" class="nav-link">Estadísticas</a>
+            </nav>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <div class="hero">
+        <div class="hero-content">
+            <h1>Viaja más allá</h1>
+            <p class="hero-subtitle">Descubre nuevos destinos con la mejor experiencia de viaje</p>
+            <div class="hero-buttons">
+                <a href="busqueda_avanzada.html" class="btn btn-primary">Buscar Vuelos</a>
+                <a href="mostrar_hoteles.php" class="btn btn-secondary">Ver Hoteles</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Search Section -->
+    <div class="search-section">
+        <div class="search-container">
+            <div class="search-tabs">
+                <button class="search-tab active">Vuelos</button>
+                <button class="search-tab">Hoteles</button>
+                <button class="search-tab">Paquetes</button>
+            </div>
+            <form class="search-form">
+                <div class="form-group">
+                    <label>Origen</label>
+                    <input type="text" class="form-control" placeholder="¿Desde dónde viajas?" />
+                </div>
+                <div class="form-group">
+                    <label>Destino</label>
+                    <input type="text" class="form-control" placeholder="¿A dónde querés ir?" />
+                </div>
+                <div class="form-group">
+                    <label>Salida</label>
+                    <input type="date" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label>Regreso</label>
+                    <input type="date" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="search-btn">Buscar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Services Section -->
+    <div class="services">
+        <div class="services-container">
+            <h2>Nuestros Servicios</h2>
+            <p class="services-subtitle">Todo lo que necesitas para tu viaje perfecto</p>
+            
+            <div class="services-grid">
+                <div class="service-card">
+                    <span class="service-icon">✈️</span>
+                    <h3>Vuelos</h3>
+                    <p>Encuentra las mejores opciones de vuelo con precios competitivos y horarios flexibles para tu próxima aventura.</p>
+                    <div class="service-actions">
+                        <a href="form_vuelo.html" class="service-link">Registrar Vuelo</a>
+                        <a href="mostrar_vuelos.php" class="service-link">Ver Vuelos</a>
+                    </div>
+                </div>
+
+                <div class="service-card">
+                    <span class="service-icon">🏨</span>
+                    <h3>Hoteles</h3>
+                    <p>Alojamiento de calidad en los mejores destinos. Desde hoteles boutique hasta resorts de lujo.</p>
+                    <div class="service-actions">
+                        <a href="form_hotel.html" class="service-link">Registrar Hotel</a>
+                        <a href="mostrar_hoteles.php" class="service-link">Ver Hoteles</a>
+                    </div>
+                </div>
+
+                <div class="service-card">
+                    <span class="service-icon">🔍</span>
+                    <h3>Búsqueda Avanzada</h3>
+                    <p>Herramientas inteligentes para encontrar exactamente lo que buscas con filtros personalizados.</p>
+                    <div class="service-actions">
+                        <a href="busqueda_avanzada.html" class="service-link">Buscar Servicios</a>
+                    </div>
+                </div>
+
+                <div class="service-card">
+                    <span class="service-icon">📋</span>
+                    <h3>Gestión de Reservas</h3>
+                    <p>Administra todas tus reservas en un solo lugar de forma simple y eficiente.</p>
+                    <div class="service-actions">
+                        <a href="mostrar_reservas.php" class="service-link">Ver Reservas</a>
+                    </div>
+                </div>
+
+                <div class="service-card">
+                    <span class="service-icon">📊</span>
+                    <h3>Estadísticas</h3>
+                    <p>Consulta estadísticas detalladas sobre servicios, destinos populares y tendencias de viaje.</p>
+                    <div class="service-actions">
+                        <a href="estadisticas.php" class="service-link">Ver Estadísticas</a>
+                    </div>
+                </div>
+
+                <div class="service-card">
+                    <span class="service-icon">⚙️</span>
+                    <h3>Administración</h3>
+                    <p>Herramientas de configuración y gestión del sistema para administradores.</p>
+                    <div class="service-actions">
+                        <a href="insertar_datos_ejemplo.php" class="service-link">Datos de Ejemplo</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+        <div class="footer-content">
+            <div class="footer-info">
+                <h3>Nuvia</h3>
+                <p class="footer-tagline">Viaja más allá de lo imaginado</p>
+            </div>
+            <p>&copy; 2025 Nuvia - Sistema de Gestión de Viajes | Desarrollado por Cristian Guilmai para IACC semana 6</p>
+        </div>
+    </div>
+</body>
+</html>
